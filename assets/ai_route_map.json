@@ -1,0 +1,34 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "previewPath": "/",
+      "name": "splash",
+      "filePath": "lib/features/splash/splash_screen.dart"
+    },
+    {
+      "path": "/onboarding",
+      "previewPath": "/onboarding",
+      "name": "onboarding",
+      "filePath": "lib/features/onboarding/onboarding_screen.dart"
+    },
+    {
+      "path": "/home",
+      "previewPath": "/home",
+      "name": "home",
+      "filePath": "lib/features/home/home_screen.dart"
+    },
+    {
+      "path": "/add",
+      "previewPath": "/add",
+      "name": "add_habit",
+      "filePath": "lib/features/add_habit/add_habit_screen.dart"
+    },
+    {
+      "path": "/settings",
+      "previewPath": "/settings",
+      "name": "settings",
+      "filePath": "lib/features/settings/settings_screen.dart"
+    }
+  ]
+}

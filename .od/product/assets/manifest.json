@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "loader",
+      "kind": "lottie",
+      "path": "assets/lottie/loader.json",
+      "source": "lottie",
+      "placeholder": false
+    },
+    {
+      "id": "success",
+      "kind": "lottie",
+      "path": "assets/lottie/success.json",
+      "source": "lottie",
+      "placeholder": false
+    },
+    {
+      "id": "empty",
+      "kind": "lottie",
+      "path": "assets/lottie/empty.json",
+      "source": "lottie",
+      "placeholder": false
+    },
+    {
+      "id": "nav_home",
+      "kind": "nav_icon",
+      "path": "assets/icons/nav_home.svg",
+      "source": "iconify",
+      "placeholder": false
+    },
+    {
+      "id": "nav_learn",
+      "kind": "nav_icon",
+      "path": "assets/icons/nav_learn.svg",
+      "source": "iconify",
+      "placeholder": false
+    },
+    {
+      "id": "nav_pals",
+      "kind": "nav_icon",
+      "path": "assets/icons/nav_pals.svg",
+      "source": "iconify",
+      "placeholder": false
+    },
+    {
+      "id": "nav_play",
+      "kind": "nav_icon",
+      "path": "assets/icons/nav_play.svg",
+      "source": "iconify",
+      "placeholder": false
+    },
+    {
+      "id": "home_hero",
+      "kind": "hero",
+      "path": "assets/images/sourced/home/hero.jpg",
+      "source": "stock",
+      "placeholder": false
+    },
+    {
+      "id": "related_1",
+      "kind": "illustration",
+      "path": "assets/images/sourced/home/related_1.jpg",
+      "source": "stock",
+      "placeholder": false
+    },
+    {
+      "id": "related_2",
+      "kind": "illustration",
+      "path": "assets/images/sourced/home/related_2.jpg",
+      "source": "stock",
+      "placeholder": false
+    },
+    {
+      "id": "related_3",
+      "kind": "illustration",
+      "path": "assets/images/sourced/home/related_3.jpg",
+      "source": "stock",
+      "placeholder": false
+    }
+  ]
+}

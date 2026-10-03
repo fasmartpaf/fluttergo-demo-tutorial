@@ -1,0 +1,14 @@
+.dart_tool/
+.packages
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+*.iml
+.idea/
+*.lock
+
+# FlutterGo — transient agent skill staging (do not commit)
+.fluttergo-skills/
+.od-skills/

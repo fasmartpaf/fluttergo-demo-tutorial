@@ -1,0 +1,59 @@
+{
+  "version": "3.0.0",
+  "discovery_complete": true,
+  "personality": "balanced",
+  "contract": "The app blueprint: skeleton + graphic motion planned for THIS product before any Dart. App level once; then every screen in scope gets its skeleton (skills/fluttergo-app-skeletons) and its motion recipe (skills/fluttergo-motion-system/references/screen-recipes.md): one signature graphic moment, an ordered entrance, feedback on every tappable, loading/empty/error, reduced fallback - built from lib/motion. Splash and onboarding are screens too.",
+  "app": {
+    "concept": "FlutterGo Demo Tutorial is a clear morning desk for daily habits — people open it to tick today's rituals and watch a day ring fill (tutorial clarity, not ritual hearth or boutique shop).",
+    "look": "Mist dawn blue desk + citrus leaf green accent; Sora display + Plus Jakarta Sans UI (fresh instructional, not charcoal/coral, sidewalk/amber, or chalk/indigo)",
+    "motion_style": "springy — check pops and ring bounce for a playful tutorial demo",
+    "navigation": "none — single Home shell with header Settings gear and FAB Add (three-screen product, not tab bar)",
+    "onboarding_flow": "welcome — one hero of habit chips + Get started (no account)",
+    "page_transition": "slideUp — Add habit rises like a sheet; Settings sharedAxisX",
+    "signature_move": "day ring fill — AppCheckCircle pops, AppProgressRing fills, streak AppCountUp ticks"
+  },
+  "background_rule": "Clean, plain backgrounds: solid surface colour, no ambient floors, blobs, grids or decorative boxes. Motion lives in the content (signature moment, entrance, feedback).",
+  "screens": {
+    "splash": {
+      "recipe": "splash",
+      "skeleton": "brand beat",
+      "signature": "AppSplash: glow bloom, mark pop + turn, name rise, tagline fade, then route",
+      "reduced": "final frame, continue after 600 ms"
+    },
+    "onboarding": {
+      "recipe": "onboarding",
+      "flow": "welcome",
+      "skeleton": "W1 welcome hero",
+      "signature": "habit chip stack on morning photo — ghost tap checks one chip, day ring peeks",
+      "entrance": ["hero fade", "mixed headline rise", "primary button rise"],
+      "feedback": ["AppPressable Get started"],
+      "reduced": "final states of each demo"
+    },
+    "home": {
+      "recipe": "home",
+      "skeleton": "H1 metric — day progress ring hero + habit checklist rows",
+      "signature": "day ring fill — toggling a habit animates AppCheckCircle, AppProgressRing, and streak AppCountUp",
+      "entrance": ["greeting rise", "progress hero rise", "habit rows stagger"],
+      "feedback": ["AppPressable rows", "AppCheckCircle pop", "FAB AppPressable"],
+      "loading": "AppSkeleton habit row shapes",
+      "empty": "friendly empty with Add habit CTA",
+      "reduced": "final states"
+    },
+    "add_habit": {
+      "recipe": "flow",
+      "skeleton": "F1 form — name field, icon chips, save",
+      "signature": "icon chip pop on select; save button status",
+      "entrance": ["title rise", "field rise", "chips stagger", "save rise"],
+      "feedback": ["AppPressable chips", "AppStatusButton save"],
+      "reduced": "final states"
+    },
+    "settings": {
+      "recipe": "settings",
+      "skeleton": "profile + preference rows",
+      "signature": "rows stagger in; reduce-motion toggle with AppPressable",
+      "entrance": ["header rise", "rows stagger"],
+      "feedback": ["AppPressable rows", "switch feedback"],
+      "reduced": "final states"
+    }
+  }
+}

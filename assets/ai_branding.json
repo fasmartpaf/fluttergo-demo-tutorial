@@ -1,0 +1,15 @@
+{
+  "appName": "Habits Demo",
+  "fullName": "FlutterGo Demo Tutorial",
+  "tagline": "Small habits. Clear day.",
+  "primary": "#2A9B6A",
+  "secondary": "#F3C96B",
+  "background": "#E8F1F4",
+  "ink": "#14201C",
+  "displayFont": "Sora",
+  "bodyFont": "Plus Jakarta Sans",
+  "iosBundleId": "com.fluttergo.demotutorial",
+  "version": "1.0.0",
+  "buildNumber": "1",
+  "appIcon": "assets/branding/app_icon_master_1024.png"
+}
