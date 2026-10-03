@@ -447,9 +447,22 @@ jobs:
             sed -i.bak "s/PROVISIONING_PROFILE = \"[^\"]*\"/PROVISIONING_PROFILE = \"$PROFILE_UUID\"/g" "$PBX"
             sed -i.bak "s/PROVISIONING_PROFILE_SPECIFIER = ""/PROVISIONING_PROFILE_SPECIFIER = \"$PROFILE_NAME\"/g" "$PBX"
             sed -i.bak "s/PROVISIONING_PROFILE = ""/PROVISIONING_PROFILE = \"$PROFILE_UUID\"/g" "$PBX"
-            # FlutterFlow templates omit Runner signing keys entirely — inject manual App Store settings.
-            if ! grep -q 'PROVISIONING_PROFILE_SPECIFIER' "$PBX"; then
-              perl -i.bak2 -0777 -pe "s/(CODE_SIGN_ENTITLEMENTS = Runner\/Runner\.entitlements;\n)/\1\t\t\t\tCODE_SIGN_STYLE = Manual;\n\t\t\t\tDEVELOPMENT_TEAM = $TEAM_ID;\n\t\t\t\tCODE_SIGN_IDENTITY = \"Apple Distribution\";\n\t\t\t\t\"CODE_SIGN_IDENTITY[sdk=iphoneos*]\" = \"Apple Distribution\";\n\t\t\t\tPROVISIONING_PROFILE_SPECIFIER = \"$PROFILE_NAME\";\n\t\t\t\tPROVISIONING_PROFILE = \"$PROFILE_UUID\";\n/g" "$PBX"
+            # Force manual App Store signing on the app target only. Flutter templates
+            # usually leave Runner's signing keys unset (implicitly Automatic), so the sed
+            # rewrites above never reach them and xcodebuild fails with "Runner is
+            # automatically signed for development, but a conflicting code signing
+            # identity Apple Distribution has been manually specified". Rewrite every
+            # XCBuildConfiguration whose PRODUCT_BUNDLE_IDENTIFIER is the app's bundle id
+            # (RunnerTests and Swift packages are left alone).
+            APP_BUNDLE_ID="${IOS_BUNDLE_ID:-}"
+            if [ -z "$APP_BUNDLE_ID" ]; then
+              APP_BUNDLE_ID=$(grep -oE 'PRODUCT_BUNDLE_IDENTIFIER = [^;]+;' "$PBX" | grep -v RunnerTests | head -1 | sed 's/.*= //;s/;//' | tr -d '"' || true)
+            fi
+            export TEAM_ID PROFILE_NAME PROFILE_UUID APP_BUNDLE_ID
+            perl -0777 -i.bak3 -pe 's{(isa = XCBuildConfiguration;[^{}]*?buildSettings = \{)(.*?)(\n\t\t\t\};)}{my ($h,$b,$t)=($1,$2,$3); if ($b =~ /PRODUCT_BUNDLE_IDENTIFIER = "?\Q$ENV{APP_BUNDLE_ID}\E"?;/) { $b =~ s/\n[ \t]*"?(?:CODE_SIGN_STYLE|DEVELOPMENT_TEAM|CODE_SIGN_IDENTITY(?:\[sdk=iphoneos\*\])?|PROVISIONING_PROFILE_SPECIFIER|PROVISIONING_PROFILE)"? = [^\n]*;//g; $b = "\n\t\t\t\tCODE_SIGN_STYLE = Manual;\n\t\t\t\tDEVELOPMENT_TEAM = $ENV{TEAM_ID};\n\t\t\t\tCODE_SIGN_IDENTITY = \"Apple Distribution\";\n\t\t\t\t\"CODE_SIGN_IDENTITY[sdk=iphoneos*]\" = \"Apple Distribution\";\n\t\t\t\tPROVISIONING_PROFILE_SPECIFIER = \"$ENV{PROFILE_NAME}\";\n\t\t\t\tPROVISIONING_PROFILE = \"$ENV{PROFILE_UUID}\";" . $b; } "$h$b$t"}gse' "$PBX"
+            if ! grep -q 'CODE_SIGN_STYLE = Manual' "$PBX"; then
+              echo "Could not apply manual App Store signing to $APP_BUNDLE_ID in $PBX"
+              exit 1
             fi
             xcodebuild -workspace ios/Runner.xcworkspace \
               -scheme Runner \
